@@ -114,7 +114,16 @@ export default function Home() {
                 key={idx}
                 position={{ lat: item.lat, lng: item.lng }}
                 clickable={true}
-                onClick={() => setIsOpen(idx)}
+                onClick={() => {
+                  setIsOpen(idx);
+                  if (map) {
+                    const movePosition = new kakao.maps.LatLng(
+                      item.lat,
+                      item.lng
+                    );
+                    map.panTo(movePosition);
+                  }
+                }}
               >
                 {isOpen === idx && (
                   <div
